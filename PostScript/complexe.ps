@@ -1,0 +1,100 @@
+%!PS
+%% Erzeugt von klx Version 1.0
+
+
+200.000000 /klxx exch def
+200.000000 /klxy exch def
+{ 1 dict begin
+/klxl exch def
+/klxw exch def
+gsave
+klxx klxy translate
+newpath
+100 0 moveto
+0 0 100 0 360 arc
+closepath fill
+grestore
+gsave
+klxx klxy translate
+1.000000 1.000000 0.000000 setrgbcolor
+newpath
+0 0 moveto 0 0 100 0 klxw 2.000000 div arc
+closepath fill
+grestore
+klxw 359.000000 klxw exch {/klxi exch def
+gsave
+klxx klxy translate
+klxi rotate
+0 0 1 setrgbcolor 
+newpath
+0 0 moveto 0 0 100 0 klxw 2.000000 div arc
+closepath fill
+grestore
+ } for
+gsave
+150.000000 klxx add klxy 100.000000 sub translate
+200.000000 100 div dup scale
+newpath
+0 0 moveto
+100 0 lineto 100 100 lineto 0 100 lineto
+closepath fill
+grestore
+gsave
+200.000000 klxx add klxy 50.000000 sub translate
+1.000000 klxl 1.000000 exch {/klxi exch def
+gsave
+100.000000 klxi div 100 div dup scale
+klxi 20.000000 neg mul rotate
+0.000000 50.000000 translate
+1.000000 klxi 1.000000 mul klxl div 0.000000 setrgbcolor
+newpath
+0 0 moveto
+100 0 lineto 100 100 lineto 0 100 lineto
+closepath fill
+grestore
+ } for
+grestore
+end } /klxkr exch def
+45.000000 10.000000 klxkr
+gsave
+20.000000 100 div dup scale
+90.000000 3.000000 klxkr
+grestore
+{ 1 dict begin
+/klxi exch def
+/klxn exch def
+0.000000 klxn lt {
+gsave
+klxi 1.000000 klxi 0.500000 mul setrgbcolor
+newpath
+0 0 moveto
+100 0 lineto 100 100 lineto 0 100 lineto
+closepath fill
+grestore
+0.000000 klxi eq {
+1.000000 /klxj exch def
+} {
+0.000000 /klxj exch def
+} ifelse
+gsave
+50.000000 100 div dup scale
+gsave
+0.000000 100.000000 translate
+klxn 1.000000 sub klxi klxq
+grestore
+gsave
+100.000000 100.000000 translate
+klxn 1.000000 sub klxj klxq
+grestore
+gsave
+100.000000 0.000000 translate
+klxn 1.000000 sub klxi klxq
+grestore
+grestore
+} if
+end } /klxq exch def
+gsave
+100.000000 400.000000 translate
+200.000000 100 div dup scale
+10.000000 1.000000 klxq
+grestore
