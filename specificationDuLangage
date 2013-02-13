@@ -1,0 +1,42 @@
+#Commentaire
+
+#PRIMITIVE
+
+#Un carre de cote 5 dont le coin inferieur gauche est placé en position de coord X=0,Y=0[]
+[0,0] carre 5
+
+#Un carre au centre de la page de cote 3
+carre 3
+
+#En position, x=20, y=30, je veux un cercle de rayon 5
+[20,30] cercle 5
+
+#DECLARATION DE VARIABLE
+
+x=200
+y=300
+
+#DECLARATION DE PROCEDURE
+
+procedure nomProcedure(arguments);
+
+#IMPLEMENTATION PROCEDURE
+
+procedure nomProcedure(arguments)
+{
+SI (X<Y)
+ALORS
+SINON
+}
+
+#REFLEXION SUR LES TYPES
+
+COULEUR rouge=5;
+ou 
+rouge ,bleu ,etc...
+ou FFCCEE
+ou RVB
+
+#A ESSAYER DE FAIRE EN PLUS
+[10,10]cube 3
+fractale

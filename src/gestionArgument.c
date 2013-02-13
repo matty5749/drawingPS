@@ -12,7 +12,7 @@ char* gestionArgument(int paramargc, char** const paramargv)
 
 		if ( paramargc == 2 )
 		{
-			printf("La traduction du code source se trouve dans le fichier traduction.cpp\n");
+			printf("\nLa traduction du code source se trouve dans le fichier traduction.cpp\n");
 			return "traduction.cpp";
 		}
 		else
@@ -40,14 +40,14 @@ char* gestionArgument(int paramargc, char** const paramargv)
 							}
 
 							rename("traduction.cpp", name);	
-							printf ("La traduction du code source se trouve dans le fichier %s  \n", name);
+							printf ("\nLa traduction du code source se trouve dans le fichier %s  \n", name);
 
 							return name;
 						break;
 						}
 
 						default:
-							printf("La traduction du code source se trouve dans le fichier traduction.cpp\n");
+							printf("\nLa traduction du code source se trouve dans le fichier traduction.cpp\n");
 							return "traduction.cpp";
 						break;
 					}
@@ -55,7 +55,7 @@ char* gestionArgument(int paramargc, char** const paramargv)
 			}
 			else 
 			{
-				printf("La traduction du code source se trouve dans le fichier traduction.cpp\n");
+				printf("\nLa traduction du code source se trouve dans le fichier traduction.cpp\n");
 				return "traduction.cpp";
 			}
 		}
