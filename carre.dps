@@ -11,7 +11,8 @@ DEBUT
 	[100,200] carrePlein 200
 	couleur[45,0,255]
 	[400,400] carre 200
-	[300,300] carrePlein 200
+	[300,300] cercle 100
+	[150,200] cerclePlein 100
 
 FIN
 #FIN DU PROGRAMME

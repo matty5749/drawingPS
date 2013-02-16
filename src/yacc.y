@@ -29,7 +29,7 @@ typedef struct token token;
 #define YYERROR_VERBOSE 1
 %}
 
-%token PROTOTYPES DECLARATIONS DEBUT FIN NOMBRE CARRE  CARREPLEIN CD CG VIRG COULEUR
+%token PROTOTYPES DECLARATIONS DEBUT FIN NOMBRE CARRE CARREPLEIN CERCLE CERCLEPLEIN CD CG VIRG COULEUR
 
 %start program
 %%
@@ -55,6 +55,8 @@ instruction :
 	color {asprintf(&$$.ps,"%s",$1.ps);}
 	|primitiveCarre {asprintf(&$$.ps,"%s",$1.ps);}
 	|primitiveCarrePlein {asprintf(&$$.ps,"%s",$1.ps);}
+	|primitiveCercle {asprintf(&$$.ps,"%s",$1.ps);}
+	|primitiveCerclePlein {asprintf(&$$.ps,"%s",$1.ps);}
 	;
 
 primitiveCarre:
@@ -72,6 +74,23 @@ primitiveCarrePlein:
 		asprintf(&$$.ps,"newpath\n%d %d moveto\n%d %d lineto\n%d %d lineto\n%d %d lineto\nclosepath\nfill\nstroke\n",x,y,x+taille,y,x+taille,y+taille,x,y+taille);
 	}
 	;
+	
+primitiveCercle:	
+	coord CERCLE NOMBRE 
+	{
+		taille=atoi($3.ps);
+		asprintf(&$$.ps,"newpath\n%d %d %d 0 360 arc \nclosepath\nstroke \n",x,y,taille);
+	}
+	;
+
+primitiveCerclePlein:	
+	coord CERCLEPLEIN NOMBRE 
+	{
+		taille=atoi($3.ps);
+		asprintf(&$$.ps,"newpath\n%d %d %d 0 360 arc \nclosepath\nfill\nstroke \n",x,y,taille);
+	}
+	;
+
 
 coord:
 	CG NOMBRE VIRG NOMBRE CD

@@ -44,10 +44,12 @@
      NOMBRE = 262,
      CARRE = 263,
      CARREPLEIN = 264,
-     CD = 265,
-     CG = 266,
-     VIRG = 267,
-     COULEUR = 268
+     CERCLE = 265,
+     CERCLEPLEIN = 266,
+     CD = 267,
+     CG = 268,
+     VIRG = 269,
+     COULEUR = 270
    };
 #endif
 

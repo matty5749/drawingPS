@@ -22,6 +22,8 @@ PROTOTYPES {return PROTOTYPES;}
 DECLARATIONS {return DECLARATIONS;}
 carre {return CARRE;}
 carrePlein {return CARREPLEIN;}
+cercle {return CERCLE;}
+cerclePlein {return CERCLEPLEIN;}
 couleur {return COULEUR;}
 	/*{COORD} {return COORD}*/
 
