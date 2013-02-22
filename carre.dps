@@ -1,6 +1,10 @@
 #PROTOTYPES DES PROCEDURES
 PROTOTYPES
 
+procedure nomProc()
+
+procedure nomProc2()
+
 #DECLARATIONS DES PROCEDURES
 DECLARATIONS
 
@@ -12,6 +16,10 @@ DEBUT
 	couleur[45,0,255]
 	[400,400] carre 200
 	[300,300] carrePlein 200
+	
+	#Un cercle de centre 360,500
+	[360,500] cercle 4
+	[360,500] cerclePlein 4
 
 FIN
 #FIN DU PROGRAMME
