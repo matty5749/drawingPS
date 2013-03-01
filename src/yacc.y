@@ -14,6 +14,8 @@ extern int yylineno;
 int x=0;
 int y=0;
 int taille=0;
+int arcDebut=0;
+int arcFin=0;
 int r=0;
 int g=0;
 int b=0;
@@ -29,7 +31,7 @@ typedef struct token token;
 #define YYERROR_VERBOSE 1
 %}
 
-%token PROTOTYPES DECLARATIONS DEBUT FIN NOMBRE CARRE CARREPLEIN CERCLE CERCLEPLEIN CD CG VIRG COULEUR
+%token PROTOTYPES DECLARATIONS DEBUT FIN NOMBRE CARRE CARREPLEIN CERCLE CERCLEPLEIN ARC CD CG VIRG COULEUR
 
 %start program
 %%
@@ -57,13 +59,14 @@ instruction :
 	|primitiveCarrePlein {asprintf(&$$.ps,"%s",$1.ps);}
 	|primitiveCercle {asprintf(&$$.ps,"%s",$1.ps);}
 	|primitiveCerclePlein {asprintf(&$$.ps,"%s",$1.ps);}
+	|primitiveArc {asprintf(&$$.ps,"%s",$1.ps);}
 	;
 
 primitiveCarre:
 	coord CARRE NOMBRE 
 	{
 		taille=atoi($3.ps);
-		asprintf(&$$.ps,"newpath\n%d %d moveto\n%d %d lineto\n%d %d lineto\n%d %d lineto\nclosepath\nstroke\n",x,y,x+taille,y,x+taille,y+taille,x,y+taille);
+		asprintf(&$$.ps,"newpath\n%d %d moveto\n%d %d lineto\n%d %d lineto\n%d %d lineto\nclosepath\nstroke\n",x-taille/2,y-taille/2,x+taille/2,y-taille/2,x+taille/2,y+taille/2,x-taille/2,y+taille/2);
 	}
 	;
 
@@ -71,7 +74,7 @@ primitiveCarrePlein:
 	coord CARREPLEIN NOMBRE 
 	{
 		taille=atoi($3.ps);
-		asprintf(&$$.ps,"newpath\n%d %d moveto\n%d %d lineto\n%d %d lineto\n%d %d lineto\nclosepath\nfill\nstroke\n",x,y,x+taille,y,x+taille,y+taille,x,y+taille);
+		asprintf(&$$.ps,"newpath\n%d %d moveto\n%d %d lineto\n%d %d lineto\n%d %d lineto\nclosepath\nfill\nstroke\n",x-taille/2,y-taille/2,x+taille/2,y-taille/2,x+taille/2,y+taille/2,x-taille/2,y+taille/2);
 	}
 	;
 	
@@ -90,6 +93,17 @@ primitiveCerclePlein:
 		asprintf(&$$.ps,"newpath\n%d %d %d 0 360 arc \nclosepath\nfill\nstroke \n",x,y,taille);
 	}
 	;
+
+primitiveArc:
+	coord ARC NOMBRE NOMBRE NOMBRE
+	{
+		taille=atoi($3.ps);
+		arcDebut=atoi($4.ps);
+		arcFin=atoi($5.ps);
+		asprintf(&$$.ps,"newpath\n%d %d %d %d %d arc \n 0 0 moveto \n closepath\nstroke \n",x,y,taille,arcDebut,arcFin);
+	}
+	;
+
 
 
 coord:

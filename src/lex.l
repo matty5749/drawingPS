@@ -24,7 +24,9 @@ carre {return CARRE;}
 carrePlein {return CARREPLEIN;}
 cercle {return CERCLE;}
 cerclePlein {return CERCLEPLEIN;}
+arc {return ARC;}
 couleur {return COULEUR;}
+
 	/*{COORD} {return COORD}*/
 
 
