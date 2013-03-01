@@ -14,6 +14,8 @@ DEBUT
 	[300,300] cercle 100
 	[150,200] cerclePlein 100
 	[500,300] arc 80 0 150
+	[400,200] secteurPlein 100 40 80
+	[400,300] rectanglePlein 100 10
 
 FIN
 #FIN DU PROGRAMME

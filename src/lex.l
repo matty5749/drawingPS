@@ -22,9 +22,13 @@ PROTOTYPES {return PROTOTYPES;}
 DECLARATIONS {return DECLARATIONS;}
 carre {return CARRE;}
 carrePlein {return CARREPLEIN;}
+rectangle {return RECTANGLE;}
+rectanglePlein {return RECTANGLEPLEIN;}
 cercle {return CERCLE;}
 cerclePlein {return CERCLEPLEIN;}
 arc {return ARC;}
+secteur {return SECTEUR;}
+secteurPlein {return SECTEURPLEIN;}
 couleur {return COULEUR;}
 
 	/*{COORD} {return COORD}*/

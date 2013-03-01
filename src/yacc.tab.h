@@ -46,11 +46,15 @@
      CARREPLEIN = 264,
      CERCLE = 265,
      CERCLEPLEIN = 266,
-     ARC = 267,
-     CD = 268,
-     CG = 269,
-     VIRG = 270,
-     COULEUR = 271
+     RECTANGLE = 267,
+     RECTANGLEPLEIN = 268,
+     ARC = 269,
+     SECTEUR = 270,
+     SECTEURPLEIN = 271,
+     CD = 272,
+     CG = 273,
+     VIRG = 274,
+     COULEUR = 275
    };
 #endif
 

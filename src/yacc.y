@@ -14,6 +14,7 @@ extern int yylineno;
 int x=0;
 int y=0;
 int taille=0;
+int longueur=0, largeur=0;
 int arcDebut=0;
 int arcFin=0;
 int r=0;
@@ -31,7 +32,7 @@ typedef struct token token;
 #define YYERROR_VERBOSE 1
 %}
 
-%token PROTOTYPES DECLARATIONS DEBUT FIN NOMBRE CARRE CARREPLEIN CERCLE CERCLEPLEIN ARC CD CG VIRG COULEUR
+%token PROTOTYPES DECLARATIONS DEBUT FIN NOMBRE CARRE CARREPLEIN CERCLE CERCLEPLEIN RECTANGLE RECTANGLEPLEIN ARC SECTEUR SECTEURPLEIN CD CG VIRG COULEUR
 
 %start program
 %%
@@ -57,9 +58,13 @@ instruction :
 	color {asprintf(&$$.ps,"%s",$1.ps);}
 	|primitiveCarre {asprintf(&$$.ps,"%s",$1.ps);}
 	|primitiveCarrePlein {asprintf(&$$.ps,"%s",$1.ps);}
+	|primitiveRectangle {asprintf(&$$.ps,"%s",$1.ps);}
+	|primitiveRectanglePlein {asprintf(&$$.ps,"%s",$1.ps);}
 	|primitiveCercle {asprintf(&$$.ps,"%s",$1.ps);}
 	|primitiveCerclePlein {asprintf(&$$.ps,"%s",$1.ps);}
 	|primitiveArc {asprintf(&$$.ps,"%s",$1.ps);}
+	|primitiveSecteur {asprintf(&$$.ps,"%s",$1.ps);}
+	|primitiveSecteurPlein {asprintf(&$$.ps,"%s",$1.ps);}
 	;
 
 primitiveCarre:
@@ -77,6 +82,24 @@ primitiveCarrePlein:
 		asprintf(&$$.ps,"newpath\n%d %d moveto\n%d %d lineto\n%d %d lineto\n%d %d lineto\nclosepath\nfill\nstroke\n",x-taille/2,y-taille/2,x+taille/2,y-taille/2,x+taille/2,y+taille/2,x-taille/2,y+taille/2);
 	}
 	;
+
+primitiveRectangle:
+	coord RECTANGLE NOMBRE NOMBRE 
+	{
+		longueur=atoi($3.ps);
+		largeur=atoi($4.ps);
+		asprintf(&$$.ps,"newpath\n%d %d moveto\n%d %d lineto\n%d %d lineto\n%d %d lineto\nclosepath\nstroke\n",x-longueur/2,y-largeur/2,x+longueur/2,y-largeur/2,x+longueur/2,y+largeur/2,x-longueur/2,y+largeur/2);
+	}
+	;	
+	
+primitiveRectanglePlein:
+	coord RECTANGLEPLEIN NOMBRE NOMBRE 
+	{
+		longueur=atoi($3.ps);
+		largeur=atoi($4.ps);
+		asprintf(&$$.ps,"newpath\n%d %d moveto\n%d %d lineto\n%d %d lineto\n%d %d lineto\nclosepath\nfill\nstroke\n",x-longueur/2,y-largeur/2,x+longueur/2,y-largeur/2,x+longueur/2,y+largeur/2,x-longueur/2,y+largeur/2);
+	}
+	;	
 	
 primitiveCercle:	
 	coord CERCLE NOMBRE 
@@ -104,7 +127,25 @@ primitiveArc:
 	}
 	;
 
+primitiveSecteur:
+	coord SECTEUR NOMBRE NOMBRE NOMBRE
+	{
+		taille=atoi($3.ps);
+		arcDebut=atoi($4.ps);
+		arcFin=atoi($5.ps);
+		asprintf(&$$.ps,"newpath\n%d %d moveto\n%d %d %d %d %d arc \nclosepath\nstroke \n",x,y,x,y,taille,arcDebut,arcFin);
+	}
+	;
 
+primitiveSecteurPlein:
+	coord SECTEURPLEIN NOMBRE NOMBRE NOMBRE
+	{
+		taille=atoi($3.ps);
+		arcDebut=atoi($4.ps);
+		arcFin=atoi($5.ps);
+		asprintf(&$$.ps,"newpath\n%d %d moveto\n%d %d %d %d %d arc \nclosepath\nfill\nstroke \n",x,y,x,y,taille,arcDebut,arcFin);
+	}
+	;
 
 coord:
 	CG NOMBRE VIRG NOMBRE CD
