@@ -123,7 +123,7 @@ primitiveArc:
 		taille=atoi($3.ps);
 		arcDebut=atoi($4.ps);
 		arcFin=atoi($5.ps);
-		asprintf(&$$.ps,"newpath\n%d %d %d %d %d arc \n 0 0 moveto \n closepath\nstroke \n",x,y,taille,arcDebut,arcFin);
+		asprintf(&$$.ps,"newpath\n%d %d %d %d %d arc \nstroke \n",x,y,taille,arcDebut,arcFin);
 	}
 	;
 

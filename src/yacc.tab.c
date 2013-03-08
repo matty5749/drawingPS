@@ -1593,7 +1593,7 @@ yyreduce:
 		taille=atoi((yyvsp[(3) - (5)]).ps);
 		arcDebut=atoi((yyvsp[(4) - (5)]).ps);
 		arcFin=atoi((yyvsp[(5) - (5)]).ps);
-		asprintf(&(yyval).ps,"newpath\n%d %d %d %d %d arc \n 0 0 moveto \n closepath\nstroke \n",x,y,taille,arcDebut,arcFin);
+		asprintf(&(yyval).ps,"newpath\n%d %d %d %d %d arc \nstroke \n",x,y,taille,arcDebut,arcFin);
 	}
     break;
 
