@@ -99,10 +99,12 @@ typedef struct token token;
 
 #define YYSTYPE token
 #define YYERROR_VERBOSE 1
+#define VAR 0
+#define PROC 1
 
 
 /* Line 268 of yacc.c  */
-#line 106 "yacc.tab.c"
+#line 108 "yacc.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -168,7 +170,7 @@ typedef int YYSTYPE;
 
 
 /* Line 343 of yacc.c  */
-#line 172 "yacc.tab.c"
+#line 174 "yacc.tab.c"
 
 #ifdef short
 # undef short
@@ -469,10 +471,10 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    40,    40,    53,    54,    58,    66,    67,    72,    79,
-      81,    85,    86,    87,    88,    89,    90,    91,    92,    93,
-      94,    95,    99,   107,   115,   123,   132,   141,   149,   157,
-     167,   177,   187,   195
+       0,    42,    42,    63,    64,    68,    76,    77,    82,    89,
+      91,    95,    96,    97,    98,    99,   100,   101,   102,   103,
+     104,   105,   109,   117,   125,   133,   142,   151,   159,   167,
+     177,   187,   197,   205
 };
 #endif
 
@@ -1446,8 +1448,15 @@ yyreduce:
         case 2:
 
 /* Line 1806 of yacc.c  */
-#line 41 "yacc.y"
+#line 43 "yacc.y"
     {
+		int erreurTS=lectureTableDeSymbole();
+		if (erreurTS || erreur)
+		{
+			fprintf(stderr,"Il y a : %d erreur\n", erreurTS+erreur);
+		}
+		else
+		{
 			printf("\nLe code source lobo est syntaxiquement correct!\n");
 			FILE* fichier=fopen("traduction.ps","w");
 			if (fichier)
@@ -1456,28 +1465,29 @@ yyreduce:
 			}
 			fclose(fichier);
 		}
+		}
     break;
 
   case 3:
 
 /* Line 1806 of yacc.c  */
-#line 53 "yacc.y"
+#line 63 "yacc.y"
     {asprintf(&(yyval).ps,"%PAS DE PROCEDURES "); }
     break;
 
   case 4:
 
 /* Line 1806 of yacc.c  */
-#line 54 "yacc.y"
+#line 64 "yacc.y"
     {asprintf(&(yyval).ps,"%PROCEDURES \n %s \n %s",(yyvsp[(1) - (2)]).ps,(yyvsp[(2) - (2)]).ps); }
     break;
 
   case 5:
 
 /* Line 1806 of yacc.c  */
-#line 59 "yacc.y"
+#line 69 "yacc.y"
     {
-		insererSymbole((yyvsp[(1) - (7)]).ps,yylineno)->arite=(yyvsp[(3) - (7)]).arite;
+		insererSymbole((yyvsp[(1) - (7)]).ps,PROC,yylineno)->arite=(yyvsp[(3) - (7)]).arite;
 		asprintf(&(yyval).ps,"/%s \n { %s }def",(yyvsp[(1) - (7)]).ps,(yyvsp[(6) - (7)]).ps);
 	}
     break;
@@ -1485,16 +1495,16 @@ yyreduce:
   case 6:
 
 /* Line 1806 of yacc.c  */
-#line 66 "yacc.y"
+#line 76 "yacc.y"
     {(yyval).arite=0;}
     break;
 
   case 7:
 
 /* Line 1806 of yacc.c  */
-#line 68 "yacc.y"
+#line 78 "yacc.y"
     {
-		insererSymbole((yyvsp[(1) - (1)]).ps,yylineno);
+		insererSymbole((yyvsp[(1) - (1)]).ps,VAR,yylineno);
 		(yyval).arite++;
 	}
     break;
@@ -1502,9 +1512,9 @@ yyreduce:
   case 8:
 
 /* Line 1806 of yacc.c  */
-#line 73 "yacc.y"
+#line 83 "yacc.y"
     {
-		insererSymbole((yyvsp[(1) - (3)]).ps,yylineno);
+		insererSymbole((yyvsp[(1) - (3)]).ps,VAR,yylineno);
 		(yyval).arite++;
 	}
     break;
@@ -1512,91 +1522,91 @@ yyreduce:
   case 10:
 
 /* Line 1806 of yacc.c  */
-#line 81 "yacc.y"
+#line 91 "yacc.y"
     {asprintf(&(yyval).ps,"%s\n%s",(yyvsp[(1) - (2)]).ps,(yyvsp[(2) - (2)]).ps);}
     break;
 
   case 11:
 
 /* Line 1806 of yacc.c  */
-#line 85 "yacc.y"
+#line 95 "yacc.y"
     {asprintf(&(yyval).ps,"%s",(yyvsp[(1) - (1)]).ps);}
     break;
 
   case 12:
 
 /* Line 1806 of yacc.c  */
-#line 86 "yacc.y"
+#line 96 "yacc.y"
     {asprintf(&(yyval).ps,"%s",(yyvsp[(1) - (1)]).ps);}
     break;
 
   case 13:
 
 /* Line 1806 of yacc.c  */
-#line 87 "yacc.y"
+#line 97 "yacc.y"
     {asprintf(&(yyval).ps,"%s",(yyvsp[(1) - (1)]).ps);}
     break;
 
   case 14:
 
 /* Line 1806 of yacc.c  */
-#line 88 "yacc.y"
+#line 98 "yacc.y"
     {asprintf(&(yyval).ps,"%s",(yyvsp[(1) - (1)]).ps);}
     break;
 
   case 15:
 
 /* Line 1806 of yacc.c  */
-#line 89 "yacc.y"
+#line 99 "yacc.y"
     {asprintf(&(yyval).ps,"%s",(yyvsp[(1) - (1)]).ps);}
     break;
 
   case 16:
 
 /* Line 1806 of yacc.c  */
-#line 90 "yacc.y"
+#line 100 "yacc.y"
     {asprintf(&(yyval).ps,"%s",(yyvsp[(1) - (1)]).ps);}
     break;
 
   case 17:
 
 /* Line 1806 of yacc.c  */
-#line 91 "yacc.y"
+#line 101 "yacc.y"
     {asprintf(&(yyval).ps,"%s",(yyvsp[(1) - (1)]).ps);}
     break;
 
   case 18:
 
 /* Line 1806 of yacc.c  */
-#line 92 "yacc.y"
+#line 102 "yacc.y"
     {asprintf(&(yyval).ps,"%s",(yyvsp[(1) - (1)]).ps);}
     break;
 
   case 19:
 
 /* Line 1806 of yacc.c  */
-#line 93 "yacc.y"
+#line 103 "yacc.y"
     {asprintf(&(yyval).ps,"%s",(yyvsp[(1) - (1)]).ps);}
     break;
 
   case 20:
 
 /* Line 1806 of yacc.c  */
-#line 94 "yacc.y"
+#line 104 "yacc.y"
     {asprintf(&(yyval).ps,"%s",(yyvsp[(1) - (1)]).ps);}
     break;
 
   case 21:
 
 /* Line 1806 of yacc.c  */
-#line 95 "yacc.y"
+#line 105 "yacc.y"
     {asprintf(&(yyval).ps,"%s",(yyvsp[(1) - (1)]).ps);}
     break;
 
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 100 "yacc.y"
+#line 110 "yacc.y"
     {
 		if (getSymbole((yyvsp[(1) - (4)]).ps)->arite==(yyvsp[(3) - (4)]).arite) getSymbole((yyvsp[(1) - (4)]).ps)->est_utilise=1;
 		asprintf(&(yyval).ps,"%s",(yyvsp[(1) - (4)]).ps );
@@ -1606,7 +1616,7 @@ yyreduce:
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 108 "yacc.y"
+#line 118 "yacc.y"
     {
 		taille=atoi((yyvsp[(3) - (3)]).ps);
 		asprintf(&(yyval).ps,"newpath\n%d %d moveto\n%d %d lineto\n%d %d lineto\n%d %d lineto\nclosepath\nstroke\n",x-taille/2,y-taille/2,x+taille/2,y-taille/2,x+taille/2,y+taille/2,x-taille/2,y+taille/2);
@@ -1616,7 +1626,7 @@ yyreduce:
   case 24:
 
 /* Line 1806 of yacc.c  */
-#line 116 "yacc.y"
+#line 126 "yacc.y"
     {
 		taille=atoi((yyvsp[(3) - (3)]).ps);
 		asprintf(&(yyval).ps,"newpath\n%d %d moveto\n%d %d lineto\n%d %d lineto\n%d %d lineto\nclosepath\nfill\nstroke\n",x-taille/2,y-taille/2,x+taille/2,y-taille/2,x+taille/2,y+taille/2,x-taille/2,y+taille/2);
@@ -1626,7 +1636,7 @@ yyreduce:
   case 25:
 
 /* Line 1806 of yacc.c  */
-#line 124 "yacc.y"
+#line 134 "yacc.y"
     {
 		longueur=atoi((yyvsp[(3) - (4)]).ps);
 		largeur=atoi((yyvsp[(4) - (4)]).ps);
@@ -1637,7 +1647,7 @@ yyreduce:
   case 26:
 
 /* Line 1806 of yacc.c  */
-#line 133 "yacc.y"
+#line 143 "yacc.y"
     {
 		longueur=atoi((yyvsp[(3) - (4)]).ps);
 		largeur=atoi((yyvsp[(4) - (4)]).ps);
@@ -1648,7 +1658,7 @@ yyreduce:
   case 27:
 
 /* Line 1806 of yacc.c  */
-#line 142 "yacc.y"
+#line 152 "yacc.y"
     {
 		taille=atoi((yyvsp[(3) - (3)]).ps);
 		asprintf(&(yyval).ps,"newpath\n%d %d %d 0 360 arc \nclosepath\nstroke \n",x,y,taille);
@@ -1658,7 +1668,7 @@ yyreduce:
   case 28:
 
 /* Line 1806 of yacc.c  */
-#line 150 "yacc.y"
+#line 160 "yacc.y"
     {
 		taille=atoi((yyvsp[(3) - (3)]).ps);
 		asprintf(&(yyval).ps,"newpath\n%d %d %d 0 360 arc \nclosepath\nfill\nstroke \n",x,y,taille);
@@ -1668,7 +1678,7 @@ yyreduce:
   case 29:
 
 /* Line 1806 of yacc.c  */
-#line 158 "yacc.y"
+#line 168 "yacc.y"
     {
 		taille=atoi((yyvsp[(3) - (5)]).ps);
 		arcDebut=atoi((yyvsp[(4) - (5)]).ps);
@@ -1680,7 +1690,7 @@ yyreduce:
   case 30:
 
 /* Line 1806 of yacc.c  */
-#line 168 "yacc.y"
+#line 178 "yacc.y"
     {
 		taille=atoi((yyvsp[(3) - (5)]).ps);
 		arcDebut=atoi((yyvsp[(4) - (5)]).ps);
@@ -1692,7 +1702,7 @@ yyreduce:
   case 31:
 
 /* Line 1806 of yacc.c  */
-#line 178 "yacc.y"
+#line 188 "yacc.y"
     {
 		taille=atoi((yyvsp[(3) - (5)]).ps);
 		arcDebut=atoi((yyvsp[(4) - (5)]).ps);
@@ -1704,7 +1714,7 @@ yyreduce:
   case 32:
 
 /* Line 1806 of yacc.c  */
-#line 188 "yacc.y"
+#line 198 "yacc.y"
     {
 		x=atoi((yyvsp[(2) - (5)]).ps);
 		y=atoi((yyvsp[(4) - (5)]).ps);
@@ -1714,7 +1724,7 @@ yyreduce:
   case 33:
 
 /* Line 1806 of yacc.c  */
-#line 196 "yacc.y"
+#line 206 "yacc.y"
     {
 		r=atoi((yyvsp[(3) - (8)]).ps);
 		g=atoi((yyvsp[(5) - (8)]).ps);
@@ -1727,7 +1737,7 @@ yyreduce:
 
 
 /* Line 1806 of yacc.c  */
-#line 1731 "yacc.tab.c"
+#line 1741 "yacc.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1958,7 +1968,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 205 "yacc.y"
+#line 215 "yacc.y"
 
 
 int main(int argc, char **argv) 

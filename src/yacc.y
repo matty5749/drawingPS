@@ -30,6 +30,8 @@ typedef struct token token;
 
 #define YYSTYPE token
 #define YYERROR_VERBOSE 1
+#define VAR 0
+#define PROC 1
 %}
 
 %token PROCEDURES DEBUT FIN NOMBRE CARRE CARREPLEIN CERCLE CERCLEPLEIN RECTANGLE RECTANGLEPLEIN ARC SECTEUR SECTEURPLEIN AG AD PG PD CD CG VIRG COULEUR IDENTIFIANT
@@ -39,6 +41,13 @@ typedef struct token token;
 
 program : PROCEDURES ensProcedures DEBUT ensInstructions FIN
 		{
+		int erreurTS=lectureTableDeSymbole();
+		if (erreurTS || erreur)
+		{
+			fprintf(stderr,"Il y a : %d erreur\n", erreurTS+erreur);
+		}
+		else
+		{
 			printf("\nLe code source lobo est syntaxiquement correct!\n");
 			FILE* fichier=fopen("traduction.ps","w");
 			if (fichier)
@@ -46,6 +55,7 @@ program : PROCEDURES ensProcedures DEBUT ensInstructions FIN
 				fprintf(fichier,"%s\n%s",$2.ps,$4.ps);
 			}
 			fclose(fichier);
+		}
 		}
 	;
 
@@ -57,7 +67,7 @@ ensProcedures:
 procedure:
 	IDENTIFIANT PG ensArguments PD AG ensInstructions AD 
 	{
-		insererSymbole($1.ps,yylineno)->arite=$3.arite;
+		insererSymbole($1.ps,PROC,yylineno)->arite=$3.arite;
 		asprintf(&$$.ps,"/%s \n { %s }def",$1.ps,$6.ps);
 	}
 	;
@@ -66,12 +76,12 @@ ensArguments:
 	/*vide*/ {$$.arite=0;}
 	| IDENTIFIANT 
 	{
-		insererSymbole($1.ps,yylineno);
+		insererSymbole($1.ps,VAR,yylineno);
 		$$.arite++;
 	}
 	| IDENTIFIANT VIRG ensArguments
 	{
-		insererSymbole($1.ps,yylineno);
+		insererSymbole($1.ps,VAR,yylineno);
 		$$.arite++;
 	}
 	;

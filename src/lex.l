@@ -4,7 +4,7 @@
 
 NOMBRE [0-9]+
 /*OPERATEUR_BINAIRE (\+|\-|\*|\/)*/
-IDENTIFIANT ([a-zA-Z]+[a-zA-Z_]*)
+IDENTIFIANT ([a-zA-Z]+[a-zA-Z_]*{NOMBRE}*)
 /*Une chaine peut contenir tout les caracteres.A FAIRE: exceptés le caractere "*/
 /*CHAINE (\".*\")*/
 COMMENTAIRE (#.*\n)

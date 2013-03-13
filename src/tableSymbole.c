@@ -6,7 +6,7 @@
 Symbole* tableSymbole;
 
 //Insere un symbole dans la table, on retient le nom et la ligne à laquelle a été trouvé le symbole
-Symbole* insererSymbole (char* identifiant,int ligne)
+Symbole* insererSymbole (char* identifiant,int procedure,int ligne)
 {
 	Symbole* ptr=(Symbole*)getSymbole(identifiant);
 	
@@ -18,6 +18,7 @@ Symbole* insererSymbole (char* identifiant,int ligne)
 		ptr->est_utilise = 0;
 		ptr->ligne = ligne;
 		ptr->arite = 0;
+		ptr->estProcedure=(procedure==1);
 		ptr->suivant = tableSymbole;
 		tableSymbole = ptr;
 	} 
@@ -46,7 +47,8 @@ int lectureTableDeSymbole()
 		{
 			nb_erreur++;
 			fprintf(stderr, "Ligne %d :\n",ptr->ligne);
-			fprintf(stderr, "Attention: la variable %s n'est pas utilisee\n\n", ptr->id);
+			if (ptr->estProcedure) fprintf(stderr, "Attention: la procedure %s n'est pas utilisee\n\n", ptr->id);
+			else fprintf(stderr, "Attention: la variable %s n'est pas utilisee\n\n", ptr->id);
 		}
 	return nb_erreur;
 }

@@ -21,12 +21,13 @@ struct s_Symbole
 	int est_utilise;	//Un drapeau(flag) afin de savoir si une variable/fonction déclaré est bien utilisé
 	int ligne;		//Le numero de la ligne de la déclaration
 	int arite;		//Pour une fonction, le nombre d'argument qu'elle attend
+	int estProcedure;       //1 si c'est une procedure, 0 si c'est une variable
 	struct s_Symbole* suivant; 	//Un pointeur vers le symbole suivant
 };
 
 typedef struct s_Symbole Symbole ;
 
-Symbole* insererSymbole (char*,int ligne);//Insere un symbole
+Symbole* insererSymbole (char*,int procedure,int ligne);//Insere un symbole
 Symbole* getSymbole (char*);//Recupere un symbole si il existe dans la table des symboles, 0 sinon
 int lectureTableDeSymbole();//Parcours de la table des symboles et renvoie du nombre d'erreur,0 si pas d'erreur
 
