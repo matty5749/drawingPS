@@ -32,26 +32,53 @@ typedef struct token token;
 #define YYERROR_VERBOSE 1
 %}
 
-%token PROTOTYPES DECLARATIONS DEBUT FIN NOMBRE CARRE CARREPLEIN CERCLE CERCLEPLEIN RECTANGLE RECTANGLEPLEIN ARC SECTEUR SECTEURPLEIN CD CG VIRG COULEUR
+%token PROCEDURES DEBUT FIN NOMBRE CARRE CARREPLEIN CERCLE CERCLEPLEIN RECTANGLE RECTANGLEPLEIN ARC SECTEUR SECTEURPLEIN AG AD PG PD CD CG VIRG COULEUR IDENTIFIANT
 
 %start program
 %%
 
-program : PROTOTYPES DECLARATIONS DEBUT ensInstructions FIN
+program : PROCEDURES ensProcedures DEBUT ensInstructions FIN
 		{
 			printf("\nLe code source lobo est syntaxiquement correct!\n");
 			FILE* fichier=fopen("traduction.ps","w");
 			if (fichier)
 			{
-				fprintf(fichier,"%s",$4.ps);
+				fprintf(fichier,"%s\n%s",$2.ps,$4.ps);
 			}
 			fclose(fichier);
 		}
 	;
 
+ensProcedures:
+	/*vide*/ {asprintf(&$$.ps,"%PAS DE PROCEDURES "); }
+	| procedure ensProcedures {asprintf(&$$.ps,"%PROCEDURES \n %s \n %s",$1.ps,$2.ps); }
+	;
+
+procedure:
+	IDENTIFIANT PG ensArguments PD AG ensInstructions AD 
+	{
+		insererSymbole($1.ps,yylineno)->arite=$3.arite;
+		asprintf(&$$.ps,"/%s \n { %s }def",$1.ps,$6.ps);
+	}
+	;
+
+ensArguments:
+	/*vide*/ {$$.arite=0;}
+	| IDENTIFIANT 
+	{
+		insererSymbole($1.ps,yylineno);
+		$$.arite++;
+	}
+	| IDENTIFIANT VIRG ensArguments
+	{
+		insererSymbole($1.ps,yylineno);
+		$$.arite++;
+	}
+	;
+
 ensInstructions:
-	instruction {asprintf(&$$.ps,"%s",$1.ps);}
-	| instruction ensInstructions {asprintf(&$$.ps,"%s %s",$1.ps,$2.ps);} 
+	/*vide*/
+	| instruction ensInstructions {asprintf(&$$.ps,"%s\n%s",$1.ps,$2.ps);} 
 	;
 
 instruction :
@@ -65,6 +92,15 @@ instruction :
 	|primitiveArc {asprintf(&$$.ps,"%s",$1.ps);}
 	|primitiveSecteur {asprintf(&$$.ps,"%s",$1.ps);}
 	|primitiveSecteurPlein {asprintf(&$$.ps,"%s",$1.ps);}
+	|appelProcedure {asprintf(&$$.ps,"%s",$1.ps);}
+	;
+
+appelProcedure:
+	IDENTIFIANT PG ensArguments PD 
+	{
+		if (getSymbole($1.ps)->arite==$3.arite) getSymbole($1.ps)->est_utilise=1;
+		asprintf(&$$.ps,"%s",$1.ps );
+	}
 	;
 
 primitiveCarre:

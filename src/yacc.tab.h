@@ -37,24 +37,28 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     PROTOTYPES = 258,
-     DECLARATIONS = 259,
-     DEBUT = 260,
-     FIN = 261,
-     NOMBRE = 262,
-     CARRE = 263,
-     CARREPLEIN = 264,
-     CERCLE = 265,
-     CERCLEPLEIN = 266,
-     RECTANGLE = 267,
-     RECTANGLEPLEIN = 268,
-     ARC = 269,
-     SECTEUR = 270,
-     SECTEURPLEIN = 271,
-     CD = 272,
-     CG = 273,
-     VIRG = 274,
-     COULEUR = 275
+     PROCEDURES = 258,
+     DEBUT = 259,
+     FIN = 260,
+     NOMBRE = 261,
+     CARRE = 262,
+     CARREPLEIN = 263,
+     CERCLE = 264,
+     CERCLEPLEIN = 265,
+     RECTANGLE = 266,
+     RECTANGLEPLEIN = 267,
+     ARC = 268,
+     SECTEUR = 269,
+     SECTEURPLEIN = 270,
+     AG = 271,
+     AD = 272,
+     PG = 273,
+     PD = 274,
+     CD = 275,
+     CG = 276,
+     VIRG = 277,
+     COULEUR = 278,
+     IDENTIFIANT = 279
    };
 #endif
 

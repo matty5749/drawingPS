@@ -18,8 +18,7 @@ COMMENTAIRE (#.*\n)
 
 DEBUT {return DEBUT;}
 FIN {return FIN;}
-PROTOTYPES {return PROTOTYPES;}
-DECLARATIONS {return DECLARATIONS;}
+PROCEDURES {return PROCEDURES;}
 carre {return CARRE;}
 carrePlein {return CARREPLEIN;}
 rectangle {return RECTANGLE;}
@@ -36,17 +35,23 @@ couleur {return COULEUR;}
 
 	/*{CHAINE} {asprintf(&yylval,"%s",yytext);return CHAINE;}*/
 	/*{OPERATEUR_BINAIRE} {asprintf(&yylval,"%s",yytext);return OPERATEUR_BINAIRE;}*/
-	/*{IDENTIFIANT} {asprintf(&yylval,"%s",yytext);return IDENTIFIANT;}*/
+
 
 {NOMBRE} {asprintf(&yylval,"%s",yytext);return NOMBRE;}
 	/*; {return POINT_VIRGULE;}*/
 
-	/*Les expressions ci dessous n'envoie pas d'information à yacc*/
 
+\{ {return AG;}
+\} {return AD;}	
+\( {return PG;}
+\) {return PD;}
 \[ {return CG;}
 \] {return CD;}
 , {return VIRG;}
 
+{IDENTIFIANT} {asprintf(&yylval,"%s",yytext); return IDENTIFIANT;}
+
+	/*Les expressions ci dessous n'envoie pas d'information à yacc*/
 
 [ \t] {}
 \n {}
