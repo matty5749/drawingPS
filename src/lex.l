@@ -19,6 +19,10 @@ COMMENTAIRE (#.*\n)
 DEBUT {return DEBUT;}
 FIN {return FIN;}
 PROCEDURES {return PROCEDURES;}
+pour {return POUR;}
+finPour {return FINPOUR;}
+\<\- {return AFFECTATION;} 
+a {return A;}
 carre {return CARRE;}
 carrePlein {return CARREPLEIN;}
 rectangle {return RECTANGLE;}

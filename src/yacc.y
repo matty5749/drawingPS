@@ -34,7 +34,7 @@ typedef struct token token;
 #define PROC 1
 %}
 
-%token PROCEDURES DEBUT FIN NOMBRE CARRE CARREPLEIN CERCLE CERCLEPLEIN RECTANGLE RECTANGLEPLEIN ARC SECTEUR SECTEURPLEIN AG AD PG PD CD CG VIRG COULEUR IDENTIFIANT
+%token PROCEDURES DEBUT FIN NOMBRE POUR FINPOUR A AFFECTATION CARRE CARREPLEIN CERCLE CERCLEPLEIN RECTANGLE RECTANGLEPLEIN ARC SECTEUR SECTEURPLEIN AG AD PG PD CD CG VIRG COULEUR IDENTIFIANT
 
 %start program
 %%
@@ -60,34 +60,34 @@ program : PROCEDURES ensProcedures DEBUT ensInstructions FIN
 	;
 
 ensProcedures:
-	/*vide*/ {asprintf(&$$.ps,"%PAS DE PROCEDURES "); }
-	| procedure ensProcedures {asprintf(&$$.ps,"%PROCEDURES \n %s \n %s",$1.ps,$2.ps); }
+	/*vide*/ {asprintf(&$$.ps,"\n"); }
+	| procedure ensProcedures {asprintf(&$$.ps,"%s\n%s",$1.ps,$2.ps); }
 	;
 
 procedure:
-	IDENTIFIANT PG ensArguments PD AG ensInstructions AD 
+	IDENTIFIANT PG ensParametres PD AG ensInstructions AD 
 	{
 		insererSymbole($1.ps,PROC,yylineno)->arite=$3.arite;
-		asprintf(&$$.ps,"/%s \n { %s }def",$1.ps,$6.ps);
+		asprintf(&$$.ps,"/%s\n{%s}def",$1.ps,$6.ps);
 	}
 	;
 
-ensArguments:
+ensParametres:
 	/*vide*/ {$$.arite=0;}
 	| IDENTIFIANT 
 	{
 		insererSymbole($1.ps,VAR,yylineno);
 		$$.arite++;
 	}
-	| IDENTIFIANT VIRG ensArguments
+	| IDENTIFIANT VIRG ensParametres
 	{
 		insererSymbole($1.ps,VAR,yylineno);
 		$$.arite++;
 	}
-	;
+ 	;
 
 ensInstructions:
-	/*vide*/
+	/*vide*/ {asprintf(&$$.ps,"\n"); }
 	| instruction ensInstructions {asprintf(&$$.ps,"%s\n%s",$1.ps,$2.ps);} 
 	;
 
@@ -103,6 +103,14 @@ instruction :
 	|primitiveSecteur {asprintf(&$$.ps,"%s",$1.ps);}
 	|primitiveSecteurPlein {asprintf(&$$.ps,"%s",$1.ps);}
 	|appelProcedure {asprintf(&$$.ps,"%s",$1.ps);}
+	|boucle {asprintf(&$$.ps,"%s",$1.ps);}
+	;
+
+boucle:
+	POUR IDENTIFIANT AFFECTATION NOMBRE A NOMBRE ensInstructions FINPOUR
+	{
+		asprintf(&$$.ps,"%d 1 %d {%s}for",atoi($4.ps),atoi($6.ps),$7.ps);
+	}
 	;
 
 appelProcedure:
@@ -112,6 +120,18 @@ appelProcedure:
 		asprintf(&$$.ps,"%s",$1.ps );
 	}
 	;
+
+ensArguments:
+	/*vide*/ {asprintf(&$$.ps,"\n"); }
+	| NOMBRE 
+	{
+		
+	}
+	| NOMBRE VIRG ensArguments
+	{
+		
+	}
+ 	;
 
 primitiveCarre:
 	coord CARRE NOMBRE 
@@ -223,19 +243,8 @@ int main(int argc, char **argv)
 			
 		yyin=(int)fichier;	
 		yyparse();
-		//char *name =(char*) gestionArgument(argc, argv);
+		char *name =(char*) gestionArgument(argc, argv);
 		fclose(fichier);
-
-		/*
-		char *strTemp;
-		strTemp = (char*)malloc(sizeof(char)*(strlen(name)+strlen("indent -linux ")+1));
-		strcpy(strTemp,"indent -linux ");
-		strcat(strTemp, name);
-		system(strTemp);
-		free(strTemp);
-		name = NULL;
-		strTemp = NULL;
-		*/
 	}
 
 return 0;

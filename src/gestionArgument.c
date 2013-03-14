@@ -12,8 +12,8 @@ char* gestionArgument(int paramargc, char** const paramargv)
 
 		if ( paramargc == 2 )
 		{
-			printf("\nLa traduction du code source se trouve dans le fichier traduction.cpp\n");
-			return "traduction.cpp";
+			printf("\nLa traduction du code source se trouve dans le fichier traduction.ps\n");
+			return "traduction.ps";
 		}
 		else
 		{
@@ -34,12 +34,12 @@ char* gestionArgument(int paramargc, char** const paramargv)
 							{
 								char *temp = (char*)malloc(sizeof(char)*(strlen(name)+5));
 								strcpy(temp, name);
-								strcat(temp, ".cpp\0");
+								strcat(temp, ".ps\0");
 								free(name);
 								name = temp;
 							}
 
-							rename("traduction.cpp", name);	
+							rename("traduction.ps", name);	
 							printf ("\nLa traduction du code source se trouve dans le fichier %s  \n", name);
 
 							return name;
@@ -47,16 +47,16 @@ char* gestionArgument(int paramargc, char** const paramargv)
 						}
 
 						default:
-							printf("\nLa traduction du code source se trouve dans le fichier traduction.cpp\n");
-							return "traduction.cpp";
+							printf("\nLa traduction du code source se trouve dans le fichier traduction.ps\n");
+							return "traduction.ps";
 						break;
 					}
 				}
 			}
 			else 
 			{
-				printf("\nLa traduction du code source se trouve dans le fichier traduction.cpp\n");
-				return "traduction.cpp";
+				printf("\nLa traduction du code source se trouve dans le fichier traduction.ps\n");
+				return "traduction.ps";
 			}
 		}
 }
