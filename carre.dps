@@ -14,18 +14,18 @@ exemple()
 	[400,300] rectanglePlein 100 10
 }
 
-#exemple2(N)
-#{
-#	pour i<-1 a N #Les boucles n'incrementent que de 1 en 1 et ne peuvent pas decrementer
-#		[10,200] cerclePlein 100
-#	finPour	
-#}
+exemple2()
+{
+	pour i<-1 a 10 2 #Les boucles n'incrementent que de 1 en 1 et ne peuvent pas decrementer
+		[300,300] cerclePlein 100
+	finPour	
+}
 
 #DEBUT DU PROGRAMME
 DEBUT
 
 	exemple()
-#	exemple2()
+	exemple2()
 
 FIN
 #FIN DU PROGRAMME

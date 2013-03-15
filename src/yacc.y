@@ -107,9 +107,9 @@ instruction :
 	;
 
 boucle:
-	POUR IDENTIFIANT AFFECTATION NOMBRE A NOMBRE ensInstructions FINPOUR
+	POUR IDENTIFIANT AFFECTATION NOMBRE A NOMBRE NOMBRE ensInstructions FINPOUR
 	{
-		asprintf(&$$.ps,"%d 1 %d {%s}for",atoi($4.ps),atoi($6.ps),$7.ps);
+		asprintf(&$$.ps,"%d %d %d {%s}for",atoi($4.ps),atoi($7.ps),atoi($6.ps),$8.ps);
 	}
 	;
 
