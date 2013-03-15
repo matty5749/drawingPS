@@ -1,21 +1,8 @@
-#PROTOTYPES DES PROCEDURES
-PROTOTYPES
-
-dessineNCarreEnCercle(N)
-
 #DECLARATIONS DES PROCEDURES
-DECLARATIONS
+PROCEDURES
 
-dessineNCarreEnCercle(N,taille)
+exemple()
 {
-	pour i<-1 a N
-		
-	finPour	
-}
-
-#DEBUT DU PROGRAMME
-DEBUT
-
 	[300,300] carre 200
 	[100,200] carrePlein 200
 	couleur[255,0,0]
@@ -25,6 +12,20 @@ DEBUT
 	[500,300] arc 80 0 150
 	[400,200] secteurPlein 100 40 80
 	[400,300] rectanglePlein 100 10
+}
+
+#exemple2(N)
+#{
+#	pour i<-1 a N #Les boucles n'incrementent que de 1 en 1 et ne peuvent pas decrementer
+#		[10,200] cerclePlein 100
+#	finPour	
+#}
+
+#DEBUT DU PROGRAMME
+DEBUT
+
+	exemple()
+#	exemple2()
 
 FIN
 #FIN DU PROGRAMME
