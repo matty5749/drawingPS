@@ -1,6 +1,5 @@
-%PROCEDURES 
- /exemple 
- { newpath
+/exemple
+{newpath
 200 200 moveto
 400 200 lineto
 400 400 lineto
@@ -58,10 +57,21 @@ closepath
 fill
 stroke
 
-300 }def 
- %PROCEDURES 
- /exemple2 
- { 10 }def 
- %PAS DE PROCEDURES 
+
+}def
+/exemple2
+{1 2 10 {newpath
+300 300 100 0 360 arc 
+closepath
+fill
+stroke 
+
+
+}for
+
+}def
+
+
 exemple
-exemple
+exemple2
+
