@@ -1,0 +1,16 @@
+Projet Postscripts
+
+Réalisé par
+Jean-Mathieu Chantrein
+Augustin Plichon
+
+-----------------MODE D'EMPLOI-----------------------
+
+-	En utilisant la console, placez-vous dans le répertoire "/src".
+
+-	Compilez le programme en utilisant la commande "make".
+
+-	Entrez la commande "./drawingPS NOM_DU_FICHIER_A_TRADUIRE [-n NOM_DU_FICHIER_OBTENU] ". Le programme génèrera un fichier Postscript (appelé par défaut "traduction.ps") qui sera la traduction en Postscript.
+
+-	Entrez la commande "ghostscript NOM_DU_FICHIER_OBTENU" afin de visualiser le résultat obtenu.
+
