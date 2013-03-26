@@ -127,7 +127,7 @@ ensArguments:
 	{
 		
 	}
-	| NOMBRE VIRG ensArguments
+	| NOMBRE VIRG ensArguments 
 	{
 		
 	}
